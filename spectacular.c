@@ -1,4 +1,4 @@
-//该计算器简单的连加减，连乘除，不考虑优先级
+//The calculator simply adds and subtracts, multiplies and divides, regardless of priority
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
@@ -67,8 +67,8 @@ int main() {    //flag=0,operator; flag=1,number               //initialize an u
        else
            stack_push(formula[i],0);
    }
-   printf( "\ntop_operate: %d ", top_operate);
-   printf( "\top_num: %d ", top_num);
+   //printf( "\ntop_operate: %d ", top_operate);
+   //printf( "\top_num: %d ", top_num);
    char *ch1;
    ch1=(char*)malloc(LINE*sizeof(char));         //set a dynamic variable use malloc()
    char *ch2;
@@ -98,8 +98,8 @@ int main() {    //flag=0,operator; flag=1,number               //initialize an u
         ch2++;
    }
    printf("total:%d",total);
-   printf( "\noperator: %s ", stack_operate);
-   printf( "\nnumber: %s ", stack_num);
+   //printf( "\noperator: %s ", stack_operate);
+   //printf( "\nnumber: %s ", stack_num);
 
    return 0;
 }
