@@ -1,4 +1,4 @@
-//¸Ã¼ÆËãÆ÷¼òµ¥µÄÁ¬¼Ó¼õ£¬Á¬³Ë³ı£¬²»¿¼ÂÇÓÅÏÈ¼¶
+//è¯¥è®¡ç®—å™¨ç®€å•çš„è¿åŠ å‡ï¼Œè¿ä¹˜é™¤ï¼Œä¸è€ƒè™‘ä¼˜å…ˆçº§
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
@@ -19,6 +19,43 @@ void stack_push(char c,int flag){   //flag=0,operator; flag=1,number
         stack_num[top_num] = c;}
 }
 
+int stack_top(char *c,int flag){     //flag=0,operator; flag=1,number
+    if(flag==0){
+      if( top_operate == -1)
+           return 1;             //if the stack is empty return 1
+      else{
+          *c=stack_operate[top_operate];           //overites the character pointed by c with the caracter currrently on top of stack
+          return 0;}
+    }
+    if(flag==1){
+       if( top_num == -1)
+          return 1;             //if the stack is empty return 1
+      else{
+         *c=stack_num[top_num];           //overites the character pointed by c with the caracter currrently on top of stack
+         return 0;}
+    }
+
+}
+
+int stack_pop(char *c,int flag){    //flag=0,operator; flag=1,number
+   int re;
+   re=stack_top(c,flag);                         //use top function to ovewrite
+   if(flag==0){
+       if( re == 0 ){
+            top_operate--;                        //if top function overwirte successfully, than remove the pointer into last character
+            return 0;}
+       if( re == 1 )
+            return 1;                     //if top function failed which the stack is empty, than return 1
+   }
+   if(flag==1){
+       if( re == 0 ){
+            top_num--;                        //if top function overwirte successfully, than remove the pointer into last character
+            return 0;}
+       if( re == 1 )
+            return 1;                     //if top function failed which the stack is empty, than return 1
+   }
+
+}
 
 int main() {    //flag=0,operator; flag=1,number               //initialize an unknown sized string
    char formula[100];
@@ -32,53 +69,37 @@ int main() {    //flag=0,operator; flag=1,number               //initialize an u
    }
    printf( "\ntop_operate: %d ", top_operate);
    printf( "\top_num: %d ", top_num);
-   int total=stack_num[top_num];
-   top_num=top_num-1;
-   int num1=0;
-   char operate;
-
-   char b[10]="qweryuiop";
-   for(int i=0;i<10;i++){
-    printf("%s 1 \n",b[i]);
+   char *ch1;
+   ch1=(char*)malloc(LINE*sizeof(char));         //set a dynamic variable use malloc()
+   char *ch2;
+   ch2=(char*)malloc(LINE*sizeof(char));         //set a dynamic variable use malloc()
+   int m=0,total=0;
+   m =stack_pop(ch1,1);
+   total=atoi(ch1);
+   ch1++;
+   while(top_num>=0){  //flag=0,operator; flag=1,number
+       m=stack_pop(ch1,1);
+       m=stack_pop(ch2,0);
+        if(*ch2=='+'){
+            total=total+atoi(ch1);}
+        if(*ch2=='-'){
+            if(top_num==-1)
+                total=atoi(ch1)-total;
+            else
+                total=total+atoi(ch1);}
+        if(*ch2=='*')
+            total=total*atoi(ch1);
+        if(*ch2=='/'){
+            if(top_num==-1)
+                total=total/atoi(ch1);
+            else
+                total=total*atoi(ch1);}
+        ch1++;
+        ch2++;
    }
-   //printf("bbbbbb%s",b[2]);
-
-   while(top_num>=0){
-       num1=stack_num[top_num];
-       operate=stack_operate[top_operate];
-       printf("1111111");
-       printf("operate %d",num1);
-        if(operate=='+')
-            total=total+num1;
-        if(operate=='-')
-            total=total-num1;
-        if(operate=='*')
-            total=total*num1;
-        if(operate=='/')
-            total=total/num1;
-        top_num--;
-        top_operate--;
-   }
-
-   printf( "\total: %d ", total);
+   printf("total:%d",total);
    printf( "\noperator: %s ", stack_operate);
    printf( "\nnumber: %s ", stack_num);
-   printf("\n");
-
-
 
    return 0;
 }
-/*
-   while(top_num>=0){
-        num=stack_pop(stack_num,1);
-        operate=stack_pop(stack_operate,0);
-        if(cun_op=='+')
-            total=total+cun_num;
-        if(cun_op=='-')
-            total=total-cun_num;
-        if(cun_op=='*')
-            total=total*cun_num;
-        if(cun_op=='/')
-            total=total/cun_num;
-   }*/
