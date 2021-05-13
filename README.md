@@ -23,6 +23,7 @@ input automaton's unobservable events:u
 When observable events are a,b and you need to input a,b  
 input automaton's observable events:a,b  
 Now,input transition functions(remind that all states need have the transition function):  
+
 ============transition function  0  =============  
 initial state is 0  
 How many event accepted by this state:2  
@@ -32,21 +33,27 @@ please input the reach states:3
 please input the event:u  
 when reach states are 1,2 and you need to input 1,2  
 please input the reach states:2  
+
 ============transition function 0  end =============  
+
 ============transition function  2  =============  
 initial state is 2  
 How many event accepted by this state:1  
 please input the event:a  
 when reach states are 1,2 and you need to input 1,2  
 please input the reach states:3  
+
 ============transition function 2  end =============  
+
 ============transition function  3  =============  
 initial state is 3  
 How many event accepted by this state:1  
 please input the event:b  
 when reach states are 1,2 and you need to input 1,2  
 please input the reach states:3  
+
 ============transition function 3  end =============  
+
 ==========This automaton(NFA) is==========   
 all states ['0', '2', '3']  
 initial state ['0']  
@@ -54,10 +61,12 @@ events ['a', 'b', 'u']
 observable events ['u']  
 unoservable events ['a', 'b']  
 transition functions {'0': {'a': ['3'], 'u': ['2']}, '2': {'a': ['3']}, '3': {'b': ['3']}}  
+
 =============================================   
 Now please input k1: 1  
 Now please input k2: 1  
 To verify the 1 - 1  delayed detectability  
+
 =============================================  
 reachStates are [('3', '3', '0', '0'), ('3', '3', '2', '0'), ('3', '3', '0', '2'), ('3', '3', '2', '2'), ('3', '3', '3', '3')]  
 it is 1 - 1 detectability  
