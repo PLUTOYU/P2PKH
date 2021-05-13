@@ -266,8 +266,6 @@ class Reach:
 
     # transFunction delete the reflexive state
     def countInverse(self, t_trans):
-        print("k1",k1,"k2",k2)
-        print("k1", self.k1, "k2", self.k2)
         for state in t_trans:
             countk1 = 0
             countk2 = 0
@@ -448,14 +446,14 @@ def InputNFA(t_states,t_start,t_input,t_inputu,t_inputo,t_trans):
     start = input("input automaton's initial set:")
     t_start = start.split(",")
     print("when events are a,b,u and you need to input a,b,u")
-    events = input("input automaton's total set:")
+    events = input("input automaton's total events:")
     t_input = events.split(",")
     print("when unobservable events are u and you need to input u")
-    eventu = input("input automaton's total set:")
-    t_inputo = eventu.split(",")
+    eventu = input("input automaton's unobservable events:")
+    t_inputu = eventu.split(",")
     print("When observable events are a,b and you need to input a,b")
-    evento = input("input automaton's observable set:")
-    t_inputu = evento.split(",")
+    evento = input("input automaton's observable events:")
+    t_inputo = evento.split(",")
     print("Now,input transition functions(remind that all states need have the transition function):")
     flag = len(t_states)
 
@@ -487,17 +485,18 @@ if __name__ == "__main__":
     t_inputo=[]
     t_states,t_start,t_input,t_inputu,t_inputo,t_trans=InputNFA(t_states,t_start,t_input,t_inputu,t_inputo,t_trans)
 
-    print("This automaton(NFA) is ")
+    print("==========This automaton(NFA) is========== ")
     print("all states",t_states)
     print("initial state",t_start)
     print("events",t_input)
     print("observable events",t_inputu)
     print("unoservable events",t_inputo)
     print("transition functions",t_trans)
-
-    k1=int(input("Now please input k1"))
-    k2 = int(input("Now please input k2"))
-
+    print("============================================= ")
+    k1=int(input("Now please input k1: "))
+    k2 = int(input("Now please input k2: "))
+    print("To verify the",k1,"-",k2," delayed detectability")
+    print("=============================================")
     #construct tw-verifier model model
     tw = TW_verifier(t_states, t_input, t_trans, t_start, t_inputo, t_inputu)
     #construct reach model and judge whtether NFA is (k1,k2)-detectability
