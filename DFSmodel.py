@@ -196,16 +196,16 @@ class Reach:
 
     #remove reach state's transition function
     def removeReachState(self, transFunction):
-        for state in self.reachState:  # 去除到达状态的传递函数
+        for state in self.reachState:  # Remove the transfer function of the arrival state
             transFunction[state] = {}
         newTransFunction = transFunction.copy()
-        for state in transFunction:  # 去除传递函数中到达reachstate的状态
+        for state in transFunction:  # Remove the reachstate state in the transfer function
             for event in transFunction[state]:
                 for current in transFunction[state][event]:
                     if current in self.reachState:
                         newTransFunction[state][event].remove(current)
 
-        for state in transFunction:  # 当传递函数中没有到达值，去除所有事件
+        for state in transFunction:  # When the value is not reached in the transfer function, remove all events
             flag = len(transFunction[state])
             nullCount = 0
             for event in transFunction[state]:
